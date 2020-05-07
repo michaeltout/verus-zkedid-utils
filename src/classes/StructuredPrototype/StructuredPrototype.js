@@ -72,9 +72,10 @@ class StructuredPrototype {
           if (ptr > bufLen) break main_loop
 
           const elementType = buf.slice(ptr - schemaType.elementTypeHashBytes, ptr).toString('hex')
-          const elementSchema = hashMap != null ? hashMap[elementType] : null
+          const elementSchema = hashMap != null ? hashMap.schemas[elementType] : null
+          const elementId = hashMap != null ? hashMap.strings[elementType] : null
 
-          if (elementSchema == null) {
+          if (elementSchema == null || elementId == null) {
             throw new StructuredMemoError(
               "Invalid Parameters",
               `Could not read buffer due to unrecognized hash. (${elementType}).`,
@@ -93,11 +94,14 @@ class StructuredPrototype {
           ptr += elementBufLen
           if (ptr > bufLen) break main_loop
 
-          extractedArray.push(StructuredPrototype.readBuffer(
-            buf.slice(ptr - elementBufLen, ptr),
-            elementSchema,
-            hashMap
-          ))
+          extractedArray.push({
+            ...StructuredPrototype.readBuffer(
+              buf.slice(ptr - elementBufLen, ptr),
+              elementSchema,
+              hashMap
+            ),
+            id: elementId
+          });
         }
 
         extractedData[schemaType.key] = extractedArray
@@ -133,7 +137,11 @@ class StructuredPrototype {
             const detectedHash = bufSlice.toString('hex')
             // If schema is expecting a 20 byte hash, validate hash and put stored
             // value behind hash into extracted data
-            if (hashMap == null || hashMap[detectedHash] == null) {
+            if (
+              hashMap == null ||
+              hashMap.strings[detectedHash] == null ||
+              (schemaType instanceof StructuredPrototypeType && hashMap.schemas[detectedHash] == null)
+            ) {
               throw new StructuredMemoError(
                 "Invalid Parameters",
                 `Could not read buffer due to unrecognized hash. (${detectedHash}).`,
@@ -143,22 +151,25 @@ class StructuredPrototype {
 
             if (schemaType instanceof StructuredPrototypeType) {
               // Read StructuredPrototype according to length field
-              ptr += schemaType.lengthFieldBytes
-              if (ptr > bufLen) break
+              ptr += schemaType.lengthFieldBytes;
+              if (ptr > bufLen) break;
 
               const extractedBufLen = fromUInt16Buffer(
                 buf.slice(ptr - schemaType.lengthFieldBytes, ptr)
               );
 
-              ptr += extractedBufLen
-              if (ptr > bufLen) break
+              ptr += extractedBufLen;
+              if (ptr > bufLen) break;
 
-              extractedData[schemaType.key] = StructuredPrototype.readBuffer(
-                buf.slice(ptr - extractedBufLen, ptr),
-                hashMap[detectedHash],
-                hashMap
-              );
-            } else extractedData[schemaType.key] = hashMap[detectedHash]
+              extractedData[schemaType.key] = {
+                id: hashMap.strings[detectedHash],
+                ...StructuredPrototype.readBuffer(
+                  buf.slice(ptr - extractedBufLen, ptr),
+                  hashMap.schemas[detectedHash],
+                  hashMap
+                ),
+              };
+            } else extractedData[schemaType.key] = hashMap.strings[detectedHash];
           } else if (schemaType instanceof UInt32) {
             // If schema is expecting 32 bit int, read the 4 bytes as a UINT32 with the label specified
             extractedData[schemaType.key] = fromUInt32Buffer(bufSlice)

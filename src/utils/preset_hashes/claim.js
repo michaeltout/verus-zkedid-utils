@@ -11,10 +11,11 @@ const claim_schemas = {
 }
 
 const claim_strings = {
+  [utf8ToHash160(STRUCTURED_CLAIM).toString('hex')]: STRUCTURED_CLAIM,
   [utf8ToHash160('covid19.health.claim:vrsc').toString('hex')]: 'covid19.health.claim:vrsc'
 }
 
 module.exports = {
-  ...claim_schemas,
-  ...claim_strings
+  schemas: claim_schemas,
+  strings: claim_strings
 }

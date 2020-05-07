@@ -57,13 +57,18 @@ describe('Basic structured prototype tests', () => {
       buf,
       [new Hash160('protocol'), new UInt32('version'), new StructuredPrototypeArray("objects")],
       {
-        ["d01746c84996e95ea6cf1616b415976ab3593c40"]: 'VRSC:MEMO',
-        ["ef179f98cb644d95017cdebcdf1dbb3c8ba0597a"]: [
-          new Hash160('type'),
-          new UInt32('version'),
-          new StructuredMemoString('data')
-        ],
-        ["1c7d9272f8aefcd7a31a5e9dcf0045059881aca4"]: 'covid19.health:claim:vrsc',
+        strings: {
+          ["d01746c84996e95ea6cf1616b415976ab3593c40"]: 'VRSC:MEMO',
+          ["1c7d9272f8aefcd7a31a5e9dcf0045059881aca4"]: 'covid19.health:claim:vrsc',
+          ['ef179f98cb644d95017cdebcdf1dbb3c8ba0597a']: 'claim:vrsc'
+        },
+        schemas: {
+          ["ef179f98cb644d95017cdebcdf1dbb3c8ba0597a"]: [
+            new Hash160('type'),
+            new UInt32('version'),
+            new StructuredMemoString('data')
+          ]
+        }
       }
     );
 

@@ -5,4 +5,4 @@ const verus_strings = {
   [utf8ToHash160(STRUCTURED_MEMO_IDENTIFIER).toString('hex')]: STRUCTURED_MEMO_IDENTIFIER
 }
 
-module.exports = { ...verus_strings }
+module.exports = { strings: verus_strings }
