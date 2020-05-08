@@ -4,7 +4,7 @@ class StructuredPrototypeArray {
    */
   constructor(key) {    
     this.key = key
-    this.sizeFieldBytes = 2
+    this.sizeFieldBytes = 4
     this.elementLengthFieldBytes = 2
     this.elementTypeHashBytes = 20
   }

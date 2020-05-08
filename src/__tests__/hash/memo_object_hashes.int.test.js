@@ -1,5 +1,4 @@
 const { 
-  STRUCTURED_MEMO_IDENTIFIER_HASH,
   STRUCTURED_MEMO_IDENTIFIER,
   STRUCTURED_MEMO_OBJECT_IDENTIFIER_INDEX
  } = require('../../utils/constants/index')
@@ -13,6 +12,6 @@ describe('Memo components hash verification', () => {
   })
 
   it('Verifies that the Structured Memo Identifier hash matches the Structured Memo Identifier', () => {
-    expect(utf8ToHash160(STRUCTURED_MEMO_IDENTIFIER).toString('hex')).toEqual(STRUCTURED_MEMO_IDENTIFIER_HASH)
+    expect(utf8ToHash160(STRUCTURED_MEMO_IDENTIFIER).toString('hex')).toEqual(utf8ToHash160(STRUCTURED_MEMO_IDENTIFIER).toString('hex'))
   })
 })

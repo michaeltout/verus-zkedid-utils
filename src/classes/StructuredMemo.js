@@ -5,7 +5,7 @@ const {
 const StructuredPrototype = require('./StructuredPrototype/StructuredPrototype')
 const { UInt32, Hash160, StructuredPrototypeArray } = require('../utils/data_types/index')
 const presetHashMap = require('../utils/preset_hashes/index')
-const MemoSchema = [new Hash160('protocol'), new UInt32('version'), new StructuredPrototypeArray("objects")]
+const MemoSchema = [new Hash160('id'), new UInt32('version'), new StructuredPrototypeArray("objects")]
 
 class StructuredMemo {
   static readBuffer(buf, hashMap = {}) {
@@ -17,7 +17,7 @@ class StructuredMemo {
     return StructuredPrototype.writeBuffer({
       schema: MemoSchema,
       data: {
-        protocol: STRUCTURED_MEMO_IDENTIFIER,
+        id: STRUCTURED_MEMO_IDENTIFIER,
         version: STRUCTURED_MEMO_VERSION,
         objects
       }

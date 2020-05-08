@@ -6,7 +6,8 @@ const claim_schemas = {
   [utf8ToHash160(STRUCTURED_CLAIM).toString('hex')]: [
     new Hash160('type'),
     new UInt32('version'),
-    new StructuredMemoString('data')
+    new StructuredMemoString('data'),
+    new StructuredMemoString("to"),
   ],
 }
 

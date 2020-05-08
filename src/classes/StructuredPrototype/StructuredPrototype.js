@@ -12,9 +12,8 @@ const {
   StructuredPrototypeArray
 } = require('../../utils/data_types/index')
 const {
-  fromUInt32Buffer,
-  fromUInt16Buffer,
-  toUInt16Buffer,
+  toUIntBuffer,
+  fromUIntBuffer
 } = require('../../utils/numbers')
 const {
   utf8ToHash160
@@ -65,7 +64,7 @@ class StructuredPrototype {
         if (ptr > bufLen) break
 
         let extractedArray = []
-        const size = fromUInt16Buffer(buf.slice(ptr - schemaType.sizeFieldBytes, ptr))
+        const size = fromUIntBuffer(buf.slice(ptr - schemaType.sizeFieldBytes, ptr), schemaType.sizeFieldBytes)
 
         for (let i = 0; i < size; i++) {
           ptr += schemaType.elementTypeHashBytes
@@ -87,8 +86,9 @@ class StructuredPrototype {
           ptr += schemaType.elementLengthFieldBytes
           if (ptr > bufLen) break main_loop
 
-          const elementBufLen = fromUInt16Buffer(
-            buf.slice(ptr - schemaType.elementLengthFieldBytes, ptr)
+          const elementBufLen = fromUIntBuffer(
+            buf.slice(ptr - schemaType.elementLengthFieldBytes, ptr),
+            schemaType.elementLengthFieldBytes
           );
 
           ptr += elementBufLen
@@ -115,7 +115,7 @@ class StructuredPrototype {
           if (ptr > bufLen) break
 
           const lengthField = buf.slice(ptr - schemaType.lengthFieldBytes, ptr)
-          sliceLen = fromUInt16Buffer(lengthField)
+          sliceLen = fromUIntBuffer(lengthField, schemaType.lengthFieldBytes)
         } else if (schemaType instanceof StructuredPrototypeType) {
           // If structured prototype, we slice the identifying hash
           sliceLen = schemaType.typeHashBytes
@@ -154,8 +154,9 @@ class StructuredPrototype {
               ptr += schemaType.lengthFieldBytes;
               if (ptr > bufLen) break;
 
-              const extractedBufLen = fromUInt16Buffer(
-                buf.slice(ptr - schemaType.lengthFieldBytes, ptr)
+              const extractedBufLen = fromUIntBuffer(
+                buf.slice(ptr - schemaType.lengthFieldBytes, ptr),
+                schemaType.lengthFieldBytes
               );
 
               ptr += extractedBufLen;
@@ -172,7 +173,7 @@ class StructuredPrototype {
             } else extractedData[schemaType.key] = hashMap.strings[detectedHash];
           } else if (schemaType instanceof UInt32) {
             // If schema is expecting 32 bit int, read the 4 bytes as a UINT32 with the label specified
-            extractedData[schemaType.key] = fromUInt32Buffer(bufSlice)
+            extractedData[schemaType.key] = fromUIntBuffer(bufSlice, 4)
           } else {
             // Assume StructuredMemoString
             extractedData[schemaType.key] = bufSlice.toString('utf8')
@@ -212,7 +213,7 @@ class StructuredPrototype {
           
           buf = Buffer.concat([
             buf,
-            toUInt16Buffer(data.length),
+            toUIntBuffer(data.length, schemaType.sizeFieldBytes),
             arrayBuf
           ]);
         } else {
@@ -222,7 +223,7 @@ class StructuredPrototype {
           buf = Buffer.concat([
             buf,
             utf8ToHash160(schemaType.key),
-            toUInt16Buffer(Buffer.byteLength(unmeasuredBuf)),
+            toUIntBuffer(Buffer.byteLength(unmeasuredBuf), schemaType.lengthFieldBytes),
             StructuredPrototype.writeBuffer(data),
           ]);
         }
