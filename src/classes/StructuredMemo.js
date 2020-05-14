@@ -9,7 +9,10 @@ const MemoSchema = [new Hash160('id'), new UInt32('version'), new StructuredProt
 
 class StructuredMemo {
   static readBuffer(buf, hashMap = {}) {
-    return StructuredPrototype.readBuffer(buf, MemoSchema, {...hashMap, ...presetHashMap})
+    return StructuredPrototype.readBuffer(buf, MemoSchema, {
+      schemas: { ...hashMap.schemas, ...presetHashMap.schemas },
+      strings: { ...hashMap.strings, ...presetHashMap.strings },
+    });
   }
 
   // Takes in an array of objects and creates a memo buffer
