@@ -8,7 +8,7 @@ const claim_schemas = {
     new UInt32('version'),
     new StructuredMemoString('data'),
     new StructuredMemoString("to"),
-  ],
+  ]
 }
 
 const claim_strings = {

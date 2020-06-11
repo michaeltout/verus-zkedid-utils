@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/",
-    "lint": "eslint src/**",
+    "lint": "",
     "pretest": "npm run lint",
     "test": "jest src",
     "coverage": "jest --collectCoverageFrom=src/**.js --coverage src"

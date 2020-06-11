@@ -8,8 +8,10 @@ const {
   StructuredMemoString,
   Hash160,
   UInt32,
+  UInt64,
   StructuredPrototypeType,
-  StructuredPrototypeArray
+  StructuredPrototypeArray,
+  Boolean
 } = require('../../utils/data_types/index')
 const {
   toUIntBuffer,
@@ -22,7 +24,7 @@ const {
 class StructuredPrototype {
   /**
    * Creates a basic boilerplate data object from a schema array
-   * @param {Hash160|StructuredMemoString|UInt32|StructuredPrototypeType Array} schemaArray
+   * @param {Hash160|StructuredMemoString|UInt32|UInt64|StructuredPrototypeTypeArray|Boolean} schemaArray
    * @param {String} key The key of this structured prototype. If left null, it will be determined when read.
    */
   constructor(schemaArray, key) {
@@ -94,14 +96,11 @@ class StructuredPrototype {
           ptr += elementBufLen
           if (ptr > bufLen) break main_loop
 
-          extractedArray.push({
-            ...StructuredPrototype.readBuffer(
-              buf.slice(ptr - elementBufLen, ptr),
-              elementSchema,
-              hashMap
-            ),
-            id: elementId
-          });
+          extractedArray.push(StructuredPrototype.readBuffer(
+            buf.slice(ptr - elementBufLen, ptr),
+            elementSchema,
+            hashMap
+          ));
         }
 
         extractedData[schemaType.key] = extractedArray
@@ -162,18 +161,16 @@ class StructuredPrototype {
               ptr += extractedBufLen;
               if (ptr > bufLen) break;
 
-              extractedData[schemaType.key] = {
-                id: hashMap.strings[detectedHash],
-                ...StructuredPrototype.readBuffer(
-                  buf.slice(ptr - extractedBufLen, ptr),
-                  hashMap.schemas[detectedHash],
-                  hashMap
-                ),
-              };
+              extractedData[schemaType.key] = StructuredPrototype.readBuffer(
+                buf.slice(ptr - extractedBufLen, ptr),
+                hashMap.schemas[detectedHash],
+                hashMap
+              )
             } else extractedData[schemaType.key] = hashMap.strings[detectedHash];
-          } else if (schemaType instanceof UInt32) {
-            // If schema is expecting 32 bit int, read the 4 bytes as a UINT32 with the label specified
-            extractedData[schemaType.key] = fromUIntBuffer(bufSlice, 4)
+          } else if (schemaType instanceof UInt32 || schemaType instanceof Boolean || schemaType instanceof UInt64) {
+            let extractedInt = fromUIntBuffer(bufSlice, schemaType.byteLength)
+
+            extractedData[schemaType.key] = schemaType instanceof Boolean ? (extractedInt ? true : false) : extractedInt
           } else {
             // Assume StructuredMemoString
             extractedData[schemaType.key] = bufSlice.toString('utf8')
@@ -203,31 +200,45 @@ class StructuredPrototype {
       const data = inputData.data[schemaType.key]
 
       if (data != null) {
-        if (schemaType instanceof Hash160 || schemaType instanceof UInt32 || schemaType instanceof StructuredMemoString) {
-          buf = Buffer.concat([buf, schemaType.create(data).buffer])
+        if (
+          schemaType instanceof Hash160 ||
+          schemaType instanceof UInt32 ||
+          schemaType instanceof UInt64 ||
+          schemaType instanceof StructuredMemoString ||
+          schemaType instanceof Boolean
+        ) {
+          buf = Buffer.concat([buf, schemaType.create(data).buffer]);
         } else if (schemaType instanceof StructuredPrototypeArray) {
-          let arrayBuf = Buffer.alloc(0)
-          data.map(subInput => {
-            arrayBuf = Buffer.concat([arrayBuf, StructuredPrototype.writeBuffer(subInput)])
-          })
-          
+          let arrayBuf = Buffer.alloc(0);
+          data.map((subInput) => {
+            arrayBuf = Buffer.concat([
+              arrayBuf,
+              StructuredPrototype.writeBuffer(subInput),
+            ]);
+          });
+
           buf = Buffer.concat([
             buf,
             toUIntBuffer(data.length, schemaType.sizeFieldBytes),
-            arrayBuf
+            arrayBuf,
           ]);
         } else {
           // Assume StructuredPrototypeType
-          const unmeasuredBuf = StructuredPrototype.writeBuffer(data)
+          const unmeasuredBuf = StructuredPrototype.writeBuffer(data);
 
           buf = Buffer.concat([
             buf,
             utf8ToHash160(schemaType.key),
-            toUIntBuffer(Buffer.byteLength(unmeasuredBuf), schemaType.lengthFieldBytes),
+            toUIntBuffer(
+              Buffer.byteLength(unmeasuredBuf),
+              schemaType.lengthFieldBytes
+            ),
             StructuredPrototype.writeBuffer(data),
           ]);
         }
       } else {
+        console.log(schemaType.key)
+
         throw new StructuredMemoError(
           "Invalid Parameters",
           schemaType.key + ' not specified in input parameters, or null.',
