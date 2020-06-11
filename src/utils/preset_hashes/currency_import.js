@@ -1,4 +1,4 @@
-const { UInt32, StructuredMemoString, UInt64, Boolean, StructuredPrototypeType } = require('../data_types/index')
+const { UInt32, StructuredMemoString, Boolean, StructuredPrototypeType } = require('../data_types/index')
 const {
   STRUCTURED_COIN_OBJECT,
   STRUCTURED_COIN_OBJECT_OPTIONS,
@@ -23,13 +23,13 @@ module.exports = {
       new StructuredPrototypeType("options")
     ],
     [STRUCTURED_COIN_OBJECT_OPTIONS_HASH]: [
-      new UInt64("dustThreshold"),
+      new UInt32("dustThreshold"),
       new UInt32("fallbackPort"),
       new StructuredMemoString("startupParams"),
       new StructuredMemoString("daemon"),
       new StructuredMemoString("customServers"),
       new StructuredMemoString("tags"),
-      new UInt64("txFee"),
+      new UInt32("txFee"),
       new StructuredPrototypeType("dirNames")
     ],
     [STRUCTURED_COIN_OBJECT_AVAILABLE_MODES_HASH]: [
