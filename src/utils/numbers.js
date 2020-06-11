@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const toUInt8Buffer = (n) => {
   let uInt8 = new Buffer.alloc(1)
   uInt8.writeUInt8(n, 0)
@@ -19,12 +21,23 @@ const toUInt32Buffer = (n) => {
   return uInt32
 }
 
+const toUInt64Buffer = (n) => {
+  let uInt64 = new Buffer.alloc(8)
+  uInt64.writeBigUInt64BE(BigInt(n), 0)
+
+  return uInt64
+}
+
 const fromUInt16Buffer = (b) => {
   return b.readUInt16BE(0)
 }
 
 const fromUInt32Buffer = (b) => {
   return b.readUInt32BE(0)
+}
+
+const fromUInt64Buffer = (b) => {
+  return Number(b.readBigUInt64BE(0))
 }
 
 const fromUInt8Buffer = (b) => {
@@ -39,6 +52,8 @@ const fromUIntBuffer = (b, bytes) => {
       return fromUInt16Buffer(b)
     case 4:
       return fromUInt32Buffer(b)
+    case 8: 
+      return fromUInt64Buffer(b)
     default:
       break;
   }
@@ -52,6 +67,8 @@ const toUIntBuffer = (b, bytes) => {
       return toUInt16Buffer(b)
     case 4:
       return toUInt32Buffer(b)
+    case 8:
+      return toUInt64Buffer(b)
     default:
       break;
   }
@@ -65,5 +82,7 @@ module.exports = {
   fromUInt32Buffer,
   fromUInt8Buffer,
   fromUIntBuffer,
-  toUIntBuffer
+  toUIntBuffer,
+  toUInt64Buffer,
+  fromUInt64Buffer
 }

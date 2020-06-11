@@ -1,6 +1,8 @@
 const Hash160 = require('./Hash160')
 const StructuredMemoString = require('./StructuredMemoString')
 const UInt32 = require('./UInt32')
+const Boolean = require('./Boolean')
+const Uint64 = require('./Uint64')
 const StructuredPrototypeType = require('./StructuredPrototypeType')
 const StructuredPrototypeArray = require('./StructuredPrototypeArray')
 
@@ -17,6 +19,8 @@ class ObjectDataSchema {
             element instanceof StructuredMemoString ||
             element instanceof UInt32 ||
             element instanceof StructuredPrototypeType ||
+            element instanceof Uint64 ||
+            element instanceof Boolean ||
             element instanceof StructuredPrototypeArray
           )
         ) {
