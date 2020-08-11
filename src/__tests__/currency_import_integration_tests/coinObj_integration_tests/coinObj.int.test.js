@@ -11,7 +11,7 @@ describe('Coin Object integration testing', () => {
       options: {
         dustThreshold: 100000,
         fallbackPort: 31423,
-        startupParams: '-ac_name=VRSC|-ac_supply=0|-ac_reward=0,38400000000,2400000000',
+        startupOptions: '-ac_name=VRSC|-ac_supply=0|-ac_reward=0,38400000000,2400000000',
         daemon: 'verusd',
         customServers: 'el0.veruscoin.io:17485:tcp|el1.veruscoin.io:17485:tcp',
         dirNames: {

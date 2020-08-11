@@ -81,9 +81,9 @@ class CoinObj {
                   options != null && options.fallbackPort != null
                     ? options.fallbackPort
                     : 0,
-                startupParams:
-                  options != null && options.startupParams != null
-                    ? options.startupParams
+                startupOptions:
+                  options != null && options.startupOptions != null
+                    ? options.startupOptions
                     : '',
                 daemon:
                   options != null && options.daemon != null

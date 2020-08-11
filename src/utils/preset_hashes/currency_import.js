@@ -25,7 +25,7 @@ module.exports = {
     [STRUCTURED_COIN_OBJECT_OPTIONS_HASH]: [
       new UInt32("dustThreshold"),
       new UInt32("fallbackPort"),
-      new StructuredMemoString("startupParams"),
+      new StructuredMemoString("startupOptions"),
       new StructuredMemoString("daemon"),
       new StructuredMemoString("customServers"),
       new StructuredMemoString("tags"),
