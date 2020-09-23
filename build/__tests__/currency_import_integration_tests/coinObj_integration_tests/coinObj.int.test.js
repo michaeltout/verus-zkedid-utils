@@ -1,13 +1,19 @@
-const VerusZkedidUtils = require('../../../index')
+"use strict";
 
-describe('Coin Object integration testing', () => {
-  it('Can create and read a coinObject import', () => {
-    const coinObj = {
+var VerusZkedidUtils = require('../../../index');
+
+describe('Coin Object integration testing', function () {
+  it('Can create and read a coinObject import', function () {
+    var coinObj = {
       id: 'TEST',
       name: 'TestCoin',
       isPbaasChain: true,
       themeColor: '#FF0000',
-      available_modes: { native: true, electrum: true, eth: false },
+      available_modes: {
+        "native": true,
+        electrum: true,
+        eth: false
+      },
       options: {
         dustThreshold: 100000,
         fallbackPort: 31423,
@@ -22,13 +28,9 @@ describe('Coin Object integration testing', () => {
         tags: 'is_pbaas|is_verus|is_zcash|is_sapling',
         txFee: 10000
       }
-    }
-
-    const import_ = VerusZkedidUtils.StructuredCurrencyImport.writeImport([
-      VerusZkedidUtils.PresetObjects.CoinObj.create(coinObj),
-    ]);
-    const import_obj = VerusZkedidUtils.StructuredCurrencyImport.readImport(import_)
-    
-    expect(import_obj).toBeDefined()
-  })
-})
+    };
+    var import_ = VerusZkedidUtils.StructuredCurrencyImport.writeImport([VerusZkedidUtils.PresetObjects.CoinObj.create(coinObj)]);
+    var import_obj = VerusZkedidUtils.StructuredCurrencyImport.readImport(import_);
+    expect(import_obj).toBeDefined();
+  });
+});

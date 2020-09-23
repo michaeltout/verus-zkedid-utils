@@ -2,18 +2,22 @@
   "name": "verus-zkedid-utils",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "scripts": {
     "start": "node src/",
     "lint": "",
     "pretest": "npm run lint",
     "test": "jest src",
+    "build": "babel src -d build",
     "coverage": "jest --collectCoverageFrom=src/**.js --coverage src"
   },
   "keywords": [],
   "author": "Michael Filip Toutonghi",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.20.2",

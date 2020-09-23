@@ -51,8 +51,6 @@ describe('Basic structured prototype tests', () => {
       },
     });
 
-    console.log(buf.toString("hex"));
-
     const bufObj = StructuredPrototype.readBuffer(
       buf,
       [new Hash160('protocol'), new UInt32('version'), new StructuredPrototypeArray("objects")],
@@ -71,8 +69,6 @@ describe('Basic structured prototype tests', () => {
         }
       }
     );
-
-    console.log(bufObj)
 
     expect(bufObj.version).toBe(2)
     expect(bufObj.objects.length).toBe(2)

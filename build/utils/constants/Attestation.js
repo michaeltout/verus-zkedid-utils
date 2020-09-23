@@ -1,0 +1,7 @@
+"use strict";
+
+// Attestation Defaults
+var STRUCTURED_ATTESTATION_VERSION = 0;
+module.exports = {
+  STRUCTURED_ATTESTATION_VERSION: STRUCTURED_ATTESTATION_VERSION
+};

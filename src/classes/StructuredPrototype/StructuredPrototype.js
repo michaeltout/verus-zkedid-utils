@@ -237,8 +237,6 @@ class StructuredPrototype {
           ]);
         }
       } else {
-        console.log(schemaType.key)
-
         throw new StructuredMemoError(
           "Invalid Parameters",
           schemaType.key + ' not specified in input parameters, or null.',

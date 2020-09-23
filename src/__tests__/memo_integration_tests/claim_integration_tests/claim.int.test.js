@@ -10,7 +10,6 @@ describe('Claim structured memo integration testing', () => {
       ),
     ]);
     
-    console.log(memo)
     const memoObj = VerusZkedidUtils.StructuredMemo.readMemo(
       "9544fba5bfe538628294dc3f36a4a2cb67061a060000000000000001ef179f98cb644d95017cdebcdf1dbb3c8ba0597a002cb3872eca23c72c7096924effcd98c47e937dbf1600000000000a30352e30352e31393833000664616d697240",
       {
@@ -31,9 +30,6 @@ describe('Claim structured memo integration testing', () => {
       }
     );
 
-    
-    console.log(memoObj)
-    
     expect(memoObj).toBeDefined()
   })
 })
