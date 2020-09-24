@@ -6,7 +6,7 @@ var UNKNOWN = 'unknown'; // Numbers
 
 var MAX_UINT16 = 65535;
 var MAX_UINT32 = 4294967295;
-var MAX_UINT64 = 9223372036854775807n; // Byte data delimiters
+var MAX_UINT64 = Number.MAX_SAFE_INTEGER; // Byte data delimiters
 
 var START_OF_TEXT = 0x02;
 var END_OF_TEXT = 0x03;
