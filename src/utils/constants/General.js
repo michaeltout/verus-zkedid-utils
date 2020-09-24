@@ -6,7 +6,7 @@ const UNKNOWN = 'unknown'
 // Numbers
 const MAX_UINT16 = 65535
 const MAX_UINT32 = 4294967295
-const MAX_UINT64 = 9223372036854775807n
+const MAX_UINT64 = Number.MAX_SAFE_INTEGER
 
 // Byte data delimiters
 const START_OF_TEXT = 0x02
