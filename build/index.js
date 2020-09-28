@@ -15,6 +15,8 @@ var Types = require('./utils/data_types/index');
 var _require = require('./utils/hash'),
     utf8ToHash160 = _require.utf8ToHash160;
 
+var constants = require('./utils/constants');
+
 module.exports = {
   StructuredMemo: StructuredMemo,
   PresetObjects: PresetObjects,
@@ -22,5 +24,6 @@ module.exports = {
   utf8ToHash160: utf8ToHash160,
   StructuredPrototype: StructuredPrototype,
   StructuredCurrencyImport: StructuredCurrencyImport,
-  VerusLink: VerusLink
+  VerusLink: VerusLink,
+  constants: constants
 };

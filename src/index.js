@@ -5,6 +5,7 @@ const VerusLink = require('./classes/VerusLink');
 const PresetObjects = require('./classes/PresetObjects')
 const Types = require('./utils/data_types/index')
 const { utf8ToHash160 } = require('./utils/hash')
+const constants = require('./utils/constants')
 
 
 module.exports = {
@@ -14,5 +15,6 @@ module.exports = {
   utf8ToHash160,
   StructuredPrototype,
   StructuredCurrencyImport,
-  VerusLink
+  VerusLink,
+  constants
 }
