@@ -6,6 +6,8 @@ var StructuredPrototype = require('./classes/StructuredPrototype/StructuredProto
 
 var StructuredCurrencyImport = require('./classes/StructuredCurrencyImport');
 
+var VerusLink = require('./classes/VerusLink');
+
 var PresetObjects = require('./classes/PresetObjects');
 
 var Types = require('./utils/data_types/index');
@@ -19,5 +21,6 @@ module.exports = {
   Types: Types,
   utf8ToHash160: utf8ToHash160,
   StructuredPrototype: StructuredPrototype,
-  StructuredCurrencyImport: StructuredCurrencyImport
+  StructuredCurrencyImport: StructuredCurrencyImport,
+  VerusLink: VerusLink
 };

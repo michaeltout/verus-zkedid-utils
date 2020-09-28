@@ -28,6 +28,7 @@ module.exports = {
       new StructuredMemoString("startupOptions"),
       new StructuredMemoString("daemon"),
       new StructuredMemoString("customServers"),
+      new StructuredMemoString("contractAddress"),
       new StructuredMemoString("tags"),
       new UInt32("txFee"),
       new StructuredPrototypeType("dirNames")

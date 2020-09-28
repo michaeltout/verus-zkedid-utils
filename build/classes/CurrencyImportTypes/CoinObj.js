@@ -41,7 +41,8 @@ var CoinObj = /*#__PURE__*/function () {
           isPbaasChain = coinObj.isPbaasChain,
           themeColor = coinObj.themeColor,
           options = coinObj.options,
-          available_modes = coinObj.available_modes;
+          available_modes = coinObj.available_modes,
+          contractAddress = coinObj.contractAddress;
       return {
         schema: [new StructuredPrototypeType(STRUCTURED_COIN_OBJECT)],
         data: _defineProperty({}, STRUCTURED_COIN_OBJECT, {
@@ -68,7 +69,7 @@ var CoinObj = /*#__PURE__*/function () {
                 linux: options != null && options.dirNames != null && options.dirNames.linux != null ? options.dirNames.linux : "",
                 win32: options != null && options.dirNames != null && options.dirNames.win32 != null ? options.dirNames.win32 : ""
               }
-            }), _defineProperty(_data, "dustThreshold", options != null && options.dustThreshold != null ? options.dustThreshold : 0), _defineProperty(_data, "fallbackPort", options != null && options.fallbackPort != null ? options.fallbackPort : 0), _defineProperty(_data, "startupOptions", options != null && options.startupOptions != null ? options.startupOptions : ''), _defineProperty(_data, "daemon", options != null && options.daemon != null ? options.daemon : ''), _defineProperty(_data, "customServers", options != null && options.customServers != null ? options.customServers : ''), _defineProperty(_data, "tags", options != null && options.tags != null ? options.tags : ''), _defineProperty(_data, "txFee", options != null && options.txFee != null ? options.txFee : 0), _data)
+            }), _defineProperty(_data, "dustThreshold", options != null && options.dustThreshold != null ? options.dustThreshold : 0), _defineProperty(_data, "fallbackPort", options != null && options.fallbackPort != null ? options.fallbackPort : 0), _defineProperty(_data, "startupOptions", options != null && options.startupOptions != null ? options.startupOptions : ''), _defineProperty(_data, "daemon", options != null && options.daemon != null ? options.daemon : ''), _defineProperty(_data, "customServers", options != null && options.customServers != null ? options.customServers : ''), _defineProperty(_data, "contractAddress", options != null && options.contractAddress != null ? options.contractAddress : ''), _defineProperty(_data, "tags", options != null && options.tags != null ? options.tags : ''), _defineProperty(_data, "txFee", options != null && options.txFee != null ? options.txFee : 0), _data)
           }), _data2)
         })
       };

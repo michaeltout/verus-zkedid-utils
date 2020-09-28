@@ -17,7 +17,7 @@ const { schemas } = require('../../utils/preset_hashes/index')
 class CoinObj {
   // Takes in an array of objects and creates an object to be passed to StructuredMemo
   static create(coinObj) {
-    const { id, name, isPbaasChain, themeColor, options, available_modes } = coinObj
+    const { id, name, isPbaasChain, themeColor, options, available_modes, contractAddress } = coinObj
 
     return {
       schema: [new StructuredPrototypeType(STRUCTURED_COIN_OBJECT)],
@@ -93,6 +93,10 @@ class CoinObj {
                   options != null && options.customServers != null
                     ? options.customServers
                     : '',
+                contractAddress: 
+                  options != null && options.contractAddress != null
+                      ? options.contractAddress
+                      : '',
                 tags:
                   options != null && options.tags != null
                     ? options.tags

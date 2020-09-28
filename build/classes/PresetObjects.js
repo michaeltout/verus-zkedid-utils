@@ -10,4 +10,6 @@ var MemoPresets = require('./MemoTypes/index');
 
 var CurrencyImportPresets = require('./CurrencyImportTypes/index');
 
-module.exports = _objectSpread(_objectSpread({}, MemoPresets), CurrencyImportPresets);
+var LinkPresets = require('./LinkTypes/index');
+
+module.exports = _objectSpread(_objectSpread(_objectSpread({}, MemoPresets), CurrencyImportPresets), LinkPresets);
