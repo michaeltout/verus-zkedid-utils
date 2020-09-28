@@ -17,6 +17,8 @@ var _require = require('./utils/hash'),
 
 var constants = require('./utils/constants');
 
+var StructuredMemoError = require('./utils/errors/StructuredMemoError');
+
 module.exports = {
   StructuredMemo: StructuredMemo,
   PresetObjects: PresetObjects,
@@ -25,5 +27,6 @@ module.exports = {
   StructuredPrototype: StructuredPrototype,
   StructuredCurrencyImport: StructuredCurrencyImport,
   VerusLink: VerusLink,
-  constants: constants
+  constants: constants,
+  StructuredMemoError: StructuredMemoError
 };

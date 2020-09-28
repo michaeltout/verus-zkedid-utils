@@ -6,6 +6,7 @@ const PresetObjects = require('./classes/PresetObjects')
 const Types = require('./utils/data_types/index')
 const { utf8ToHash160 } = require('./utils/hash')
 const constants = require('./utils/constants')
+const StructuredMemoError = require('./utils/errors/StructuredMemoError')
 
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
   StructuredPrototype,
   StructuredCurrencyImport,
   VerusLink,
-  constants
+  constants,
+  StructuredMemoError
 }
