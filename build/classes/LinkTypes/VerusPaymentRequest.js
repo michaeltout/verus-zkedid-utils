@@ -25,6 +25,9 @@ var schemas = presetHashMap.schemas;
 var _require2 = require('../../utils/data_types'),
     StructuredPrototypeType = _require2.StructuredPrototypeType;
 
+var _require3 = require('../../utils/strings'),
+    secure = _require3.secure;
+
 var VerusPaymentRequest = /*#__PURE__*/function () {
   function VerusPaymentRequest() {
     _classCallCheck(this, VerusPaymentRequest);
@@ -34,14 +37,19 @@ var VerusPaymentRequest = /*#__PURE__*/function () {
     key: "create",
 
     /**
-     * @param {String} currency_id Verus network style currency id (e.g. .eth. or .bat.eth. or .vrsc)
+     * @param {String} currency_id Currency ID or address (i address or .name)
+     * @param {String} system_id The i-address (if applicable) of the system used, or the .name of the system (e.g. .eth)
+     * @param {String} display_name The name to display for this currency
+     * @param {String} display_ticker The ticker to display for this currency
      * @param {String} amount Amount of payment request in smallest currency delimination (e.g. satoshis)
      * @param {String} currency_import (optional) The currency import string for the currency being requested
+     * @param {{signer: String, signature: String}} sig_obj The data required to verify the coin import 
      * @param {String} note (optional) a small note to display on the device that currency is being requested from
      */
-    value: function create(currency_id, amount) {
-      var currency_import = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
-      var note = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+    value: function create(currency_id, system_id, display_name, display_ticker, amount) {
+      var currency_import = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "";
+      var sig_obj = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {};
+      var note = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : "";
       if (currency_id == null) throw new StructuredMemoError("Invalid Parameters", "Cannot create payment request from null or undefined currency id.", INVALID_SM_PARAMS);
       return {
         schema: [new StructuredPrototypeType(VERUS_PAYMENT_REQUEST)],
@@ -54,9 +62,14 @@ var VerusPaymentRequest = /*#__PURE__*/function () {
             schema: schemas[VERUS_PAYMENT_REQUEST_PAYLOAD_HASH],
             data: {
               currency_id: currency_id,
-              amount: amount || "",
-              currency_import: currency_import || "",
-              note: note || ""
+              amount: secure(amount),
+              system_id: secure(system_id),
+              display_name: secure(display_name),
+              display_ticker: secure(display_ticker),
+              currency_import_signature: secure(sig_obj.signature),
+              currency_import_signer: secure(sig_obj.signer),
+              currency_import: secure(currency_import),
+              note: secure(note)
             }
           })
         })
