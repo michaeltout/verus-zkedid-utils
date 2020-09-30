@@ -36,13 +36,12 @@ var VerusPaymentRequest = /*#__PURE__*/function () {
     /**
      * @param {String} currency_id Verus network style currency id (e.g. .eth. or .bat.eth. or .vrsc)
      * @param {String} amount Amount of payment request in smallest currency delimination (e.g. satoshis)
-     * @param {Number} decimals Amount of decimal places requied to turn above amount into standard delimination
      * @param {String} currency_import (optional) The currency import string for the currency being requested
      * @param {String} note (optional) a small note to display on the device that currency is being requested from
      */
-    value: function create(currency_id, amount, decimals) {
-      var currency_import = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-      var note = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
+    value: function create(currency_id, amount) {
+      var currency_import = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+      var note = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
       if (currency_id == null) throw new StructuredMemoError("Invalid Parameters", "Cannot create payment request from null or undefined currency id.", INVALID_SM_PARAMS);
       return {
         schema: [new StructuredPrototypeType(VERUS_PAYMENT_REQUEST)],
@@ -55,8 +54,7 @@ var VerusPaymentRequest = /*#__PURE__*/function () {
             schema: schemas[VERUS_PAYMENT_REQUEST_PAYLOAD_HASH],
             data: {
               currency_id: currency_id,
-              amount: amount == null ? 0 : amount,
-              decimals: amount == null ? 0 : decimals,
+              amount: amount || "",
               currency_import: currency_import || "",
               note: note || ""
             }

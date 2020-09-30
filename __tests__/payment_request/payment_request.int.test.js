@@ -18,22 +18,11 @@ describe('Payment request integration testing', () => {
     const import_ = VerusZkedidUtils.StructuredCurrencyImport.writeImport([
       VerusZkedidUtils.PresetObjects.CoinObj.create(coinObj),
     ]);
-
-    console.log(VerusZkedidUtils.VerusLink.readLink(VerusZkedidUtils.VerusLink.writeLink([
-      VerusZkedidUtils.PresetObjects.VerusPaymentRequest.create(
-        ".vrsc",
-        "800000000",
-        8,
-        import_,
-        ""
-      ),
-    ])).objects[0].payload)
     
     expect(VerusZkedidUtils.VerusLink.readLink(VerusZkedidUtils.VerusLink.writeLink([
       VerusZkedidUtils.PresetObjects.VerusPaymentRequest.create(
         ".vrsc",
-        "800000000",
-        8,
+        "143.1481717741748188",
         import_,
         ""
       ),

@@ -15,11 +15,10 @@ class VerusPaymentRequest {
   /**
    * @param {String} currency_id Verus network style currency id (e.g. .eth. or .bat.eth. or .vrsc)
    * @param {String} amount Amount of payment request in smallest currency delimination (e.g. satoshis)
-   * @param {Number} decimals Amount of decimal places requied to turn above amount into standard delimination
    * @param {String} currency_import (optional) The currency import string for the currency being requested
    * @param {String} note (optional) a small note to display on the device that currency is being requested from
    */
-  static create(currency_id, amount, decimals, currency_import = "", note = "") {
+  static create(currency_id, amount, currency_import = "", note = "") {
     if (currency_id == null)
       throw new StructuredMemoError(
         "Invalid Parameters",
@@ -39,8 +38,7 @@ class VerusPaymentRequest {
               schema: schemas[VERUS_PAYMENT_REQUEST_PAYLOAD_HASH],
               data: {
                 currency_id,
-                amount: amount == null ? 0 : amount,
-                decimals: amount == null ? 0 : decimals,
+                amount: amount || "",
                 currency_import: currency_import || "",
                 note: note || "",
               },

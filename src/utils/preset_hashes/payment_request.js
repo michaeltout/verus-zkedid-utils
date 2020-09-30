@@ -16,7 +16,6 @@ module.exports = {
     [VERUS_PAYMENT_REQUEST_PAYLOAD_HASH]: [
       new StructuredMemoString("currency_id"),
       new StructuredMemoString("amount"),
-      new UInt32("decimals"),
       new StructuredMemoString("currency_import"),
       new StructuredMemoString("note"),
     ]
