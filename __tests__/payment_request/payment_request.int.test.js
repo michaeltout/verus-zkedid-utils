@@ -21,9 +21,13 @@ describe('Payment request integration testing', () => {
     
     expect(VerusZkedidUtils.VerusLink.readLink(VerusZkedidUtils.VerusLink.writeLink([
       VerusZkedidUtils.PresetObjects.VerusPaymentRequest.create(
-        ".vrsc",
+        "Verus",
+        "Verus@",
+        "Verus",
+        "VRSC",
         "143.1481717741748188",
         import_,
+        {signer: 'Verus@', signature: "testsig"},
         ""
       ),
     ]))).toBeDefined()

@@ -15,7 +15,12 @@ module.exports = {
     ],
     [VERUS_PAYMENT_REQUEST_PAYLOAD_HASH]: [
       new StructuredMemoString("currency_id"),
+      new StructuredMemoString("system_id"),
       new StructuredMemoString("amount"),
+      new StructuredMemoString("display_name"),
+      new StructuredMemoString("display_ticker"),
+      new StructuredMemoString("currency_import_signature"),
+      new StructuredMemoString("currency_import_signer"),
       new StructuredMemoString("currency_import"),
       new StructuredMemoString("note"),
     ]
