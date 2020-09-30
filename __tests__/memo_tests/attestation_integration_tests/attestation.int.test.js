@@ -1,4 +1,4 @@
-const VerusZkedidUtils = require('../../../index')
+const VerusZkedidUtils = require('../../../src/index')
 
 describe('Attestation structured memo integration testing', () => {
   it('Can create and read an attestation', () => {

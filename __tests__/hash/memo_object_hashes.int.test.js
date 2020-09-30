@@ -1,8 +1,8 @@
 const { 
   STRUCTURED_MEMO_IDENTIFIER,
   STRUCTURED_MEMO_OBJECT_IDENTIFIER_INDEX
- } = require('../../utils/constants/index')
-const { utf8ToHash160 } = require('../../utils/hash')
+ } = require('../../src/utils/constants/index')
+const { utf8ToHash160 } = require('../../src/utils/hash')
 
 describe('Memo components hash verification', () => {
   it('Verifies that all hashes in the STRUCTURED_MEMO_OBJECT_IDENTIFIER_INDEX match with their hash key', () => {

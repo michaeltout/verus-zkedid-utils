@@ -1,4 +1,4 @@
-const { utf8ToHash160 } = require('../../../src/utils/hash')
+const { utf8ToHash160 } = require('../../src/utils/hash')
 
 describe('Basic HASH160 unit tests', () => {
   it('Can hash simple string with hash160', () => {

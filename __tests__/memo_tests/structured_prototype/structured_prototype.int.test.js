@@ -1,5 +1,5 @@
-const StructuredPrototype = require('../../../classes/StructuredPrototype/StructuredPrototype')
-const { UInt32, Hash160, StructuredMemoString, StructuredPrototypeType, StructuredPrototypeArray } = require('../../../../src/utils/data_types/index')
+const StructuredPrototype = require('../../../src/classes/StructuredPrototype/StructuredPrototype')
+const { UInt32, Hash160, StructuredMemoString, StructuredPrototypeType, StructuredPrototypeArray } = require('../../../src/utils/data_types/index')
 
 describe('Basic structured prototype tests', () => {
   it('Can create and verify basic structured prototype', () => {
