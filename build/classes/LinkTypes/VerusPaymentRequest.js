@@ -51,7 +51,6 @@ var VerusPaymentRequest = /*#__PURE__*/function () {
       var currency_import = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : "";
       var sig_obj = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : {};
       var note = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : "";
-      if (currency_id == null) throw new StructuredMemoError("Invalid Parameters", "Cannot create payment request from null or undefined currency id.", INVALID_SM_PARAMS);
       return {
         schema: [new StructuredPrototypeType(VERUS_PAYMENT_REQUEST)],
         data: _defineProperty({}, VERUS_PAYMENT_REQUEST, {
@@ -62,7 +61,7 @@ var VerusPaymentRequest = /*#__PURE__*/function () {
           }, VERUS_PAYMENT_REQUEST_PAYLOAD, {
             schema: schemas[VERUS_PAYMENT_REQUEST_PAYLOAD_HASH],
             data: {
-              currency_id: currency_id,
+              currency_id: secure(currency_id),
               amount: secure(amount),
               system_id: secure(system_id),
               display_name: secure(display_name),
