@@ -17,6 +17,7 @@ module.exports = {
       new StructuredMemoString("currency_id"),
       new StructuredMemoString("system_id"),
       new StructuredMemoString("amount"),
+      new StructuredMemoString("destination"),
       new StructuredMemoString("display_name"),
       new StructuredMemoString("display_ticker"),
       new StructuredMemoString("currency_import_signature"),

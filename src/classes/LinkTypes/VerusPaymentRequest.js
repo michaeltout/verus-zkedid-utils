@@ -18,12 +18,23 @@ class VerusPaymentRequest {
    * @param {String} system_id The i-address (if applicable) of the system used, or the .name of the system (e.g. .eth)
    * @param {String} display_name The name to display for this currency
    * @param {String} display_ticker The ticker to display for this currency
+   * @param {String} destination The address or ID that the invoice is creates to
    * @param {String} amount Amount of payment request in smallest currency delimination (e.g. satoshis)
    * @param {String} currency_import (optional) The currency import string for the currency being requested
-   * @param {{signer: String, signature: String}} sig_obj The data required to verify the coin import 
+   * @param {{signer: String, signature: String}} sig_obj The data required to verify the coin import
    * @param {String} note (optional) a small note to display on the device that currency is being requested from
    */
-  static create(currency_id, system_id, display_name, display_ticker, amount, currency_import = "", sig_obj = {}, note = "") {
+  static create(
+    currency_id,
+    system_id,
+    display_name,
+    display_ticker,
+    destination,
+    amount,
+    currency_import = "",
+    sig_obj = {},
+    note = ""
+  ) {
     if (currency_id == null)
       throw new StructuredMemoError(
         "Invalid Parameters",
@@ -47,6 +58,7 @@ class VerusPaymentRequest {
                 system_id: secure(system_id),
                 display_name: secure(display_name),
                 display_ticker: secure(display_ticker),
+                destination: secure(destination),
                 currency_import_signature: secure(sig_obj.signature),
                 currency_import_signer: secure(sig_obj.signer),
                 currency_import: secure(currency_import),

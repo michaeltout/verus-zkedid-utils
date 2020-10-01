@@ -25,6 +25,7 @@ describe('Payment request integration testing', () => {
         "Verus@",
         "Verus",
         "VRSC",
+        "Michael@",
         "143.1481717741748188",
         import_,
         {signer: 'Verus@', signature: "testsig"},
