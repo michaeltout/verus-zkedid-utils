@@ -35,13 +35,6 @@ class VerusPaymentRequest {
     sig_obj = {},
     note = ""
   ) {
-    if (currency_id == null)
-      throw new StructuredMemoError(
-        "Invalid Parameters",
-        "Cannot create payment request from null or undefined currency id.",
-        INVALID_SM_PARAMS
-      );
-
     return {
       schema: [new StructuredPrototypeType(VERUS_PAYMENT_REQUEST)],
       data: {
@@ -53,7 +46,7 @@ class VerusPaymentRequest {
             [VERUS_PAYMENT_REQUEST_PAYLOAD]: {
               schema: schemas[VERUS_PAYMENT_REQUEST_PAYLOAD_HASH],
               data: {
-                currency_id,
+                currency_id: secure(currency_id),
                 amount: secure(amount),
                 system_id: secure(system_id),
                 display_name: secure(display_name),
