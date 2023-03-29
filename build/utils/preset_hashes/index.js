@@ -14,7 +14,11 @@ var attestation = require('./attestation');
 
 var currency_import = require('./currency_import');
 
+var payment_request = require('./payment_request');
+
+var verus_link = require('./verus_link');
+
 module.exports = {
-  strings: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, verus.strings), claim.strings), attestation.strings), currency_import.strings),
-  schemas: _objectSpread(_objectSpread(_objectSpread({}, claim.schemas), attestation.schemas), currency_import.schemas)
+  strings: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, verus.strings), claim.strings), attestation.strings), currency_import.strings), payment_request.strings), verus_link.strings),
+  schemas: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, claim.schemas), attestation.schemas), currency_import.schemas), payment_request.schemas), verus_link.schemas)
 };

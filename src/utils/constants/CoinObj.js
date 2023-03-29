@@ -7,7 +7,7 @@ const {
 } = require("./StructuredCurrencyImport");
 
 // Attestation Defaults
-const STRUCTURED_COIN_OBJECT_VERSION = 0
+const STRUCTURED_COIN_OBJECT_VERSION = 1
 
 const STRUCTURED_COIN_OBJECT_HASH = [utf8ToHash160(STRUCTURED_COIN_OBJECT).toString('hex')]
 const STRUCTURED_COIN_OBJECT_OPTIONS_HASH = [utf8ToHash160(STRUCTURED_COIN_OBJECT_OPTIONS).toString('hex')]

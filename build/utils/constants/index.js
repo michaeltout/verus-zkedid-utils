@@ -18,4 +18,8 @@ var StructuredCurrencyImport = require('./StructuredCurrencyImport');
 
 var CoinObj = require('./CoinObj');
 
-module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Claims), StructuredMemo), General), Attestation), StructuredCurrencyImport), CoinObj);
+var VerusLink = require('./VerusLink');
+
+var VerusPay = require('./VerusPay');
+
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Claims), StructuredMemo), General), Attestation), StructuredCurrencyImport), CoinObj), VerusLink), VerusPay);

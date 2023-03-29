@@ -7,7 +7,7 @@
     "start": "node src/",
     "lint": "",
     "pretest": "npm run lint",
-    "test": "jest src",
+    "test": "jest",
     "build": "babel src -d build",
     "coverage": "jest --collectCoverageFrom=src/**.js --coverage src"
   },
@@ -25,6 +25,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.63.0"
   }
 }

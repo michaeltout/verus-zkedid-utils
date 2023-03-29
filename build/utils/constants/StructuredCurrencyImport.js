@@ -14,7 +14,7 @@ var CURRENCY_IMPORT_VERSION = 0; // Currency Import Children
 
 var STRUCTURED_COIN_OBJECT = 'structured_coin_object:vrsc';
 var STRUCTURED_COIN_OBJECT_DIRECTORY_NAMES = 'dirNames';
-var STRUCTURED_COIN_OBJECT_AVAILABLE_MODES = 'available_modes';
+var STRUCTURED_COIN_OBJECT_AVAILABLE_MODES = 'available_protocols';
 var STRUCTURED_COIN_OBJECT_OPTIONS = 'options';
 module.exports = {
   CURRENCY_IMPORT_IDENTIFIER: CURRENCY_IMPORT_IDENTIFIER,

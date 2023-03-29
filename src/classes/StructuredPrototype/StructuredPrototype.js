@@ -209,6 +209,7 @@ class StructuredPrototype {
         ) {
           buf = Buffer.concat([buf, schemaType.create(data).buffer]);
         } else if (schemaType instanceof StructuredPrototypeArray) {
+
           let arrayBuf = Buffer.alloc(0);
           data.map((subInput) => {
             arrayBuf = Buffer.concat([

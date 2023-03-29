@@ -14,7 +14,7 @@ const CURRENCY_IMPORT_VERSION = 0
 // Currency Import Children
 const STRUCTURED_COIN_OBJECT = 'structured_coin_object:vrsc'
 const STRUCTURED_COIN_OBJECT_DIRECTORY_NAMES = 'dirNames'
-const STRUCTURED_COIN_OBJECT_AVAILABLE_MODES = 'available_modes'
+const STRUCTURED_COIN_OBJECT_AVAILABLE_MODES = 'available_protocols'
 const STRUCTURED_COIN_OBJECT_OPTIONS = 'options'
 
 
